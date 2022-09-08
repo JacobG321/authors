@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react'
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import styles from "../static/AuthorForm.module.css"
+
 
 const AuthorList = (props) => {
 
@@ -32,28 +34,32 @@ const AuthorList = (props) => {
         <div>
             <h1>Favorite Authors</h1>
             <p>We have quotes by:</p>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Authors name</td>
-                        <td>View/Edit/Delete</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        authorsSorted.map((author, index)=>{
-                        return  <tr key={index}>
-                                <td>{author.name}</td>
-                                <td>
-                                    <Link to={{pathname:`/author/${author._id}`}} >View </Link>
-                                    <Link to={"/author/edit/" + author._id}>Edit </Link>
-                                    <button onClick={(e)=>{deleteAuthor(author._id)}}>Delete</button>
-                                </td>
-                            </tr>
-                        })
-                    }
-                </tbody>
-            </table>
+
+            <div className={styles.centerForm}>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Authors name</td>
+                            <td>View/Edit/Delete</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            authorsSorted.map((author, index)=>{
+                            return  <tr key={index}>
+                                    <td>{author.name}</td>
+                                    <td>
+                                        <Link to={{pathname:`/author/${author._id}`}} >View </Link>
+                                        <Link to={"/author/edit/" + author._id}>Edit </Link>
+                                        <button onClick={(e)=>{deleteAuthor(author._id)}}>Delete</button>
+                                    </td>
+                                </tr>
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
             <Link to={'/create/'}>Create Author</Link>
         </div>
     )

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {useNavigate, useParams, Link} from "react-router-dom";
+import styles from "../static/AuthorForm.module.css"
+
 
 
 const UpdateAuthor = (props) => {
@@ -16,7 +18,6 @@ const UpdateAuthor = (props) => {
             .then(res => {
                 const response = res.data.author[0]
                 console.log(res.data.author[0])
-                // console.log("response test", response.name)
                 setName(response.name)
             })
             .catch(err => console.log(err))
@@ -49,16 +50,18 @@ const UpdateAuthor = (props) => {
             <h1>Favorite Authors</h1>
             <Link to={`/`}>Home</Link>
             <p>Edit this author</p>
-            <form onSubmit={updateHandler}>
-                {errors.map((err, index) => <p key={index}>{err}</p>)}
-                <label htmlFor='name'>Author name</label>
-                <input type="text" name="name" value={name} onChange={(e) => {setName(e.target.value)}}/>
-                <div>
-                    <button type='submit'>Submit</button>
-                    <button type='button' onClick={cancelHandler}>Cancel</button>
-                </div>
-            </form>
 
+            <div className={styles.centerForm}>
+                <form onSubmit={updateHandler}>
+                    {errors.map((err, index) => <p key={index}>{err}</p>)}
+                    <label htmlFor='name'>Author name</label>
+                    <input type="text" name="name" value={name} onChange={(e) => {setName(e.target.value)}}/>
+                    <div>
+                        <button type='submit'>Submit</button>
+                        <button type='button' onClick={cancelHandler}>Cancel</button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

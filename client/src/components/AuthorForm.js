@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import {useNavigate, Link} from "react-router-dom";
+import styles from "../static/AuthorForm.module.css"
 
 
 const AuthorForm = (props) => {
@@ -40,16 +41,19 @@ const AuthorForm = (props) => {
         <div>
             <h1>Favorite Authors</h1>
             <Link to={`/`}>Home</Link>
+
             <p>Add new author:</p>
-            <form onSubmit={onSubmitHandler}>
-                    {errors.map((err, index) => <p key={index}>{err}</p>)}
-                    <label htmlFor='name'>name</label>
-                    <input type="text" name='name' value={name} onChange = {(e)=>setName(e.target.value)}/>
-                    <div>
-                        <button type='submit'>Submit</button>
-                        <button type='button' onClick={cancelHandler}>Cancel</button>
-                    </div>
-            </form>
+            <div className={styles.centerForm}>
+                <form onSubmit={onSubmitHandler}>
+                        {errors.map((err, index) => <p key={index}>{err}</p>)}
+                        <label htmlFor='name'>Name:</label>
+                        <input type="text" name='name' value={name} onChange = {(e)=>setName(e.target.value)}/>
+                        <div>
+                            <button type='submit'>Submit</button>
+                            <button type='button' onClick={cancelHandler}>Cancel</button>
+                        </div>
+                </form>
+            </div>
             
         </div>
     )
