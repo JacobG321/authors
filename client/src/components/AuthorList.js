@@ -30,11 +30,10 @@ const AuthorList = (props) => {
     
     return (
         <div>
+            <h1>Favorite Authors</h1>
+            <p>We have quotes by:</p>
             <table>
                 <thead>
-                    <tr>
-                        <th colSpan="2">Authors</th>
-                    </tr>
                     <tr>
                         <td>Authors name</td>
                         <td>View/Edit/Delete</td>
@@ -55,6 +54,7 @@ const AuthorList = (props) => {
                     }
                 </tbody>
             </table>
+            <Link to={'/create/'}>Create Author</Link>
         </div>
     )
 }

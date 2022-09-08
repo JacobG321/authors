@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, Link} from "react-router-dom";
 
 
 const UpdateAuthor = (props) => {
@@ -40,14 +40,23 @@ const UpdateAuthor = (props) => {
                 setErrors(errorArray)
             })
     }
+    const cancelHandler = (e) => {
+        navigate('/')
+    }
 
     return (
         <div>
+            <h1>Favorite Authors</h1>
+            <Link to={`/`}>Home</Link>
+            <p>Edit this author</p>
             <form onSubmit={updateHandler}>
                 {errors.map((err, index) => <p key={index}>{err}</p>)}
                 <label htmlFor='name'>Author name</label>
                 <input type="text" name="name" value={name} onChange={(e) => {setName(e.target.value)}}/>
-                <input type="submit"/>
+                <div>
+                    <button type='submit'>Submit</button>
+                    <button type='button' onClick={cancelHandler}>Cancel</button>
+                </div>
             </form>
 
         </div>

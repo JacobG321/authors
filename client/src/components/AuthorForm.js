@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import {useNavigate, Link} from "react-router-dom";
+
 
 const AuthorForm = (props) => {
     const {authors, setAuthors} = props
     const [name, setName] = useState(""); 
     const [errors, setErrors] = useState([])
+    const navigate = useNavigate()
+    
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
@@ -16,6 +20,7 @@ const AuthorForm = (props) => {
                 setAuthors([...authors, res.data])
                 setName('')
                 setErrors([])
+                navigate('/')
             })
             .catch(err=>{
                 const errorResponse = err.response.data.errors
@@ -27,14 +32,26 @@ const AuthorForm = (props) => {
             })
     }
 
-    return (
-        <form onSubmit={onSubmitHandler}>
-                {errors.map((err, index) => <p key={index}>{err}</p>)}
-                <label htmlFor='name'>name</label>
-                <input type="text" name='name' value={name} onChange = {(e)=>setName(e.target.value)}/>
+    const cancelHandler = (e) => {
+        navigate('/')
+    }
 
-                <input type="submit"/>
-        </form>
+    return (
+        <div>
+            <h1>Favorite Authors</h1>
+            <Link to={`/`}>Home</Link>
+            <p>Add new author:</p>
+            <form onSubmit={onSubmitHandler}>
+                    {errors.map((err, index) => <p key={index}>{err}</p>)}
+                    <label htmlFor='name'>name</label>
+                    <input type="text" name='name' value={name} onChange = {(e)=>setName(e.target.value)}/>
+                    <div>
+                        <button type='submit'>Submit</button>
+                        <button type='button' onClick={cancelHandler}>Cancel</button>
+                    </div>
+            </form>
+            
+        </div>
     )
 }
 export default AuthorForm;
